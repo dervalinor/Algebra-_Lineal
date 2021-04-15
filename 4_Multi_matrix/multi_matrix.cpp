@@ -36,6 +36,7 @@ void ask(){
       for(int j = 0; j < col1; j++){
         cout << "Element " << "[" << i  << "]" << "[" << j  << "]: "; cin >> matrix1[i][j];
       }
+      cout << "\n";
     }
 
   cout << "\nElements of the matrix B: " << endl;
@@ -45,6 +46,7 @@ void ask(){
       for(int j = 0; j < col2; j++){
         cout << "Element " << "[" << i  << "]" << "[" << j  << "]: "; cin >> matrix2[i][j];
       }
+      cout << "\n";
     }
 
     multi_matrix(matrix1, matrix2, row1, row2, col1, col2);

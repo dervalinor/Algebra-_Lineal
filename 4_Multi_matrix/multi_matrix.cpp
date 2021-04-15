@@ -55,6 +55,10 @@ void ask(){
 }
 
 void multi_matrix(double matrix1[100][100], double matrix2[100][100], int row1, int row2, int col1, int col2){
+  
+  cout << "\nResult: " << endl;
+  cout << "\n";
+
   for(int i = 0; i < row1; i ++){
     k = i;
     for(int j = 0; j < col2; j ++){

@@ -13,14 +13,16 @@ int main(int argc, char const *argv[])
 }
 
 void ask(){
+  //possible the error is save differents value in same variable:
+  //- put the result of the equations in other vector and only work with this
 
   double matrix[100][100];
   int n, m;
 
   cout << "Search the solution of system of n variables and m equations" << endl;
   
-  cout << "\nNumber of variables: "; cin >> n;
-  cout << "Number of equations: "; cin >> m;
+  cout << "\nNumber of variables: "; cin >> m;
+  cout << "Number of equations: "; cin >> n;
   
   cout << "Give me value of coefficient in form matrix: " << endl;
   for(int i = 0; i < n; i++){ 
@@ -45,20 +47,51 @@ void Gauss_Jordan(double matrix[100][100], int n, int m){
       matrix[i][j] = a;
     }
 
-    for(int i = N; i > 0; i --){
-      for(int j = 0; j < m; j ++){
-        b = -matrix[i][N]*matrix[N][j] + matrix[i][j];
-        matrix[i][j] = b;
+    if(N == 0){//because N - 1 no exist in N = 0
+      
+      for(int i = N + 1; i < n; i++){
+        for(int j = 0; j <= m; j ++){
+            c = -matrix[i][N]*matrix[N][j] + matrix[i][j];
+            matrix[i][j] = c;
+        }
+      }
+    } else if(N == n - 1){
+    
+      for(int i = N - 1; i >= 0; i --){
+        for(int j = 0; j <= m; j ++){
+          b = -matrix[i][N]*matrix[N][j] + matrix[i][j];
+          matrix[i][j] = b;
+        }
+      }
+    } else {
+    
+      for(int i = N - 1; i >= 0; i --){
+        for(int j = 0; j <= m; j ++){
+          b = -matrix[i][N]*matrix[N][j] + matrix[i][j];
+          matrix[i][j] = b;
+        }
+      }
+
+
+    for(int i = N + 1; i < n; i++){
+      for(int j = 0; j <= m; j ++){
+          c = -matrix[i][N]*matrix[N][j] + matrix[i][j];
+          matrix[i][j] = c;
+        }
       }
     }
+
+  }
+  
+  cout << "Solution of system of linear equations: " << endl;
+
   cout << "\n";
-  for(int i = N; i < n; i++){
+
+  for(int i = 0; i < n; i ++){
     for(int j = 0; j < m; j ++){
-      c = -matrix[i][N]*matrix[N][j] + matrix[i][j];
-      matrix[i][j] = c;
+      cout << matrix[i][j] << " ";
     }
-  }
-  cout << "\n";
-  }
+    cout << "\n";
+  }  
 
 }

@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 void ask(){
   //possible the error is save differents value in same variable:
   //- put the result of the equations in other vector and only work with this
-
+  //see each equations as a vector 
   double matrix[100][100];
   int n, m;
 

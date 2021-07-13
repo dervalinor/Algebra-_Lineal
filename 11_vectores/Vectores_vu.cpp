@@ -8,10 +8,10 @@ using namespace std;
 void ask();
 double inner_product(double v[], double u[], int);
 double angle_uv(double v[],double u[], int);
-double crux_product(double v[], double u[], int);
+void crux_product(double v[], double u[], int);
 double magnitude(double vektor[], int);
 
-double C = 0;
+double C = 0, D = 0, a = 0, E = 0;
 
 int main(){
   
@@ -20,12 +20,12 @@ int main(){
 }
 
 void ask(){
-  double u[], v[];
-  int opt;
+  double u[100], v[100];
+  int opt, n;
   cout << "Operation of two vectores" << endl;
-  cout << "1. Inner-product u.v" << endl;
+  cout << "1. Inner-product v.u" << endl;
   cout << "2. Angle between two vectores" << endl;
-  cout << "3. crux-product uxv" << endl;
+  cout << "3. crux-product vxu" << endl;
   cout << "Choose an option: "; cin >> opt;
   cout <<"\n";
   cout << "Size of the vectores: "; cin >> n;
@@ -46,10 +46,14 @@ void ask(){
       angle_uv(v, u, n);
       break;
     
-    if(n == 3){
-      
+    case 3:
+      if(n == 3){
+        crux_product(v, u, n);
+      } else {
+        cout << "Crux product is for vectores of 3 dimentiones" << endl;
+      }
+      break;
     }
-  }
 }
 
 double inner_product(double v[], double u[], int n){
@@ -63,13 +67,24 @@ double inner_product(double v[], double u[], int n){
 double angle_uv(double v[], double u[], int n){
   C = inner_product(v, u, n);
   D = magnitude(v, n)*magnitude(u, n);
-  E = acos(C/D); 
+  E = acos(C/D);
+  return E; 
 }
 
-double crux_product(double v[], double u[], int n){
-  
+void crux_product(double v[], double u[], int n){
+  C = v[2]*u[3] - u[2]*v[3];
+  D = v[1]*u[3] - u[1]*v[3];
+  a = v[1]*u[2] - u[1]*v[2];
+  cout << "vxu = " << C << "i + (" << - D << ")j + (" << a << ")k" << endl;
 }
 
 double magnitude(double v[], int n){
-  
+  C = 0;
+  for(int i = 0; i < n; i ++){
+    a = v[i];
+    C = C + pow(a, n);
+  }
+
+  D = sqrt(C);
+  return D;
 }

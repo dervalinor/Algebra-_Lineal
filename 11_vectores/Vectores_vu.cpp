@@ -6,6 +6,7 @@
 using namespace std;
 
 void ask();
+void vectores(double v[],double u[], int);
 double inner_product(double v[], double u[], int);
 double angle_uv(double v[],double u[], int);
 void crux_product(double v[], double u[], int);
@@ -20,8 +21,9 @@ int main(){
 }
 
 void ask(){
-  double u[100], v[100];
   int opt, n;
+  double v[100], u[100];
+  //we can send parameter undefined to a function 
   cout << "Operation of two vectores" << endl;
   cout << "1. Inner-product v.u" << endl;
   cout << "2. Angle between two vectores" << endl;
@@ -29,31 +31,37 @@ void ask(){
   cout << "Choose an option: "; cin >> opt;
   cout <<"\n";
   cout << "Size of the vectores: "; cin >> n;
-  cout << "\nElement of the vector u: " << endl;
-  for(int i = 0; i < n; i ++){
-    cout << "Element " << i + 1 << " : "; cin >> u[i];
-  }
-  cout << "\nElement of the vector v: " << endl;
-  for(int i = 0; i < n; i ++){
-    cout << "Element " << i + 1 << " : "; cin >> v[i];
-  }
   switch(opt){
     case 1:
+      vectores(v, u, n);
       inner_product(v, u, n);
       break;
       
     case 2:
+      vectores(v, u, n);
       angle_uv(v, u, n);
       break;
     
     case 3:
       if(n == 3){
+        vectores(v, u, n);
         crux_product(v, u, n);
       } else {
         cout << "Crux product is for vectores of 3 dimentiones" << endl;
       }
       break;
     }
+}
+
+void vectores(double v[], double u[],int n){
+  cout << "\nElement of the vector v: " << endl;
+  for(int i = 0; i < n; i ++){
+    cout << "Element " << i + 1 << " : "; cin >> v[i];
+  }
+  cout << "\nElement of the vector u: " << endl;
+  for(int i = 0; i < n; i ++){
+    cout << "Element " << i + 1 << " : "; cin >> u[i];
+  }
 }
 
 double inner_product(double v[], double u[], int n){

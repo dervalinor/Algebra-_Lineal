@@ -24,13 +24,13 @@ void ask(){
   int opt, n;
   double v[100], u[100];
   //we can send parameter undefined to a function 
+  cout << "Size of the vectores: "; cin >> n;
   cout << "Operation of two vectores" << endl;
   cout << "1. Inner-product v.u" << endl;
   cout << "2. Angle between two vectores" << endl;
   cout << "3. crux-product vxu" << endl;
   cout << "Choose an option: "; cin >> opt;
   cout <<"\n";
-  cout << "Size of the vectores: "; cin >> n;
   switch(opt){
     case 1:
       vectores(v, u, n);

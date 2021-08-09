@@ -32,10 +32,7 @@ void ask(){
     change_row(matrix, n);
   }
 
-  else {
-    factorizacion_LU(matrix, n);
-  }
-
+  factorizacion_LU(matrix, n);
 }
 
 void factorizacion_LU(double matrix[100][100], int n){
@@ -98,22 +95,25 @@ double determinante(double matrix[100][100], int n){
 }
 
 void change_row(double matrix[100][100], int n){
-  int k, j, m = 0;
-
+  int k, m = 0;
   for(int i = 0; i < n; i ++){
+    k = i;
     for(int j = 0; j < n; j ++){
-      if(matrix[i][j] != 0){
-        m++;
-        if(m == 1){
-          k = i;
-          l = j;
-          interchange(matrix, k, l);
-        }
+
+      if(matrix[k][l] != 0){
+        interchange(matrix, k);
       }
     }
   }
 }
 
-void interchange(double matrix[][], int k, int l){
-  
+        
+
+void interchange(double matrix[100][100], int k){
+  double aux;
+  for(int i = 0; i < n; i ++){
+    aux = matrix[0][i];
+    matrix[0][i] = matrix[k][i];
+    matrix[k][i] = aux;
+  }
 }

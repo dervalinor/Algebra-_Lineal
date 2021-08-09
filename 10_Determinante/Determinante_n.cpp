@@ -27,7 +27,15 @@ void ask(){
       cout << "Element " << "[" <<i  + 1 << "]["<< j + 1 << "] : "; cin >> matrix[i][j];
     }
   }
-  factorizacion_LU(matrix, n);
+
+  if(matrix[0][0] == 0){
+    change_row(matrix, n);
+  }
+
+  else {
+    factorizacion_LU(matrix, n);
+  }
+
 }
 
 void factorizacion_LU(double matrix[100][100], int n){
@@ -90,5 +98,22 @@ double determinante(double matrix[100][100], int n){
 }
 
 void change_row(double matrix[100][100], int n){
+  int k, j, m = 0;
+
+  for(int i = 0; i < n; i ++){
+    for(int j = 0; j < n; j ++){
+      if(matrix[i][j] != 0){
+        m++;
+        if(m == 1){
+          k = i;
+          l = j;
+          interchange(matrix, k, l);
+        }
+      }
+    }
+  }
+}
+
+void interchange(double matrix[][], int k, int l){
   
 }

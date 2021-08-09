@@ -10,6 +10,7 @@ void convert_vector(double matrix[100][100], int, int, int, double); //remember 
 void factorizacion_LU(double matrix[100][100], int);
 double determinante(double matrix[100][100], int);
 void change_row(double matrix[100][100], int);
+void interchange(double matrix[100][100], int, int);
 
 int main(){
   ask();
@@ -99,9 +100,9 @@ void change_row(double matrix[100][100], int n){
   for(int i = 0; i < n; i ++){
     k = i;
     for(int j = 0; j < n; j ++){
-
-      if(matrix[k][l] != 0){
-        interchange(matrix, k);
+      m ++;
+      if(matrix[k][j] != 0 and m ==1){
+        interchange(matrix, k, n);
       }
     }
   }
@@ -109,7 +110,7 @@ void change_row(double matrix[100][100], int n){
 
         
 
-void interchange(double matrix[100][100], int k){
+void interchange(double matrix[100][100], int k, int n){
   double aux;
   for(int i = 0; i < n; i ++){
     aux = matrix[0][i];

@@ -9,8 +9,10 @@ void ask();
 void convert_vector(double matrix[100][100], int, int, int, double); //remember is for a matrix nxn
 void factorizacion_LU(double matrix[100][100], int);
 double determinante(double matrix[100][100], int);
-void change_row(double matrix[100][100], int);
-void interchange(double matrix[100][100], int, int);
+void change_rows(double matrix[100][100], int, int, int);
+//matriz[Rj][i] != 0 for maker the changer of rows
+//create function for find Rj
+int find_Rj(double matrix[100][100], int);
 
 int main(){
   ask();
@@ -18,6 +20,7 @@ int main(){
 }
 
 void ask(){
+  int Ri, Rj;
   double matrix[100][100];
   int n;
   cout << "Transform the matrix n*n A in U triangle superior matrix" << endl;
@@ -30,7 +33,9 @@ void ask(){
   }
 
   if(matrix[0][0] == 0){
-    change_row(matrix, n);
+    Ri = 0;
+    Rj = find_Rj(matrix, n);
+    change_rows(matrix, n, Ri, Rj);
   }
 
   factorizacion_LU(matrix, n);
@@ -95,26 +100,23 @@ double determinante(double matrix[100][100], int n){
   return D;
 }
 
-void change_row(double matrix[100][100], int n){
-  int k, m = 0;
-  for(int i = 0; i < n; i ++){
-    k = i;
-    for(int j = 0; j < n; j ++){
-      m ++;
-      if(matrix[k][j] != 0 and m ==1){
-        interchange(matrix, k, n);
-      }
+int find_Rj(double matrix[100][100], int n){
+  for(int i = 1; i < n; i ++){
+    if(matrix[i][0] != 0){
+      return i;
     }
   }
 }
 
-        
-
-void interchange(double matrix[100][100], int k, int n){
-  double aux;
+void change_rows(double matrix[100][100], int n, int Ri, int Rj){
+  double vector1[100], vector2[100];
   for(int i = 0; i < n; i ++){
-    aux = matrix[0][i];
-    matrix[0][i] = matrix[k][i];
-    matrix[k][i] = aux;
+    vector1[i] = matrix[Ri][i];
+    vector2[i] = matrix[Rj][i];
+  }
+  
+  for(int i = 0; i < n; i ++){
+    matrix[Ri][i] = vector2[i];
+    matrix[Rj][i] = vector1[i];
   }
 }

@@ -1,5 +1,4 @@
-//find the determinate for matrix nxn with a recursive function, reduce the
-//order n to 2x2
+//find the determinate for matrix nxn with a recursive function, A = LU
 #include <iostream>
 #include <math.h>
 
@@ -7,8 +6,8 @@ using namespace std;
 
 void ask();
 void convert_vector(double matrix[100][100], int, int, int, double); //remember is for a matrix nxn
-void factorizacion_LU(double matrix[100][100], int);
-double determinante(double matrix[100][100], int);
+void factorizacion_LU(double matrix[100][100], int, int);
+double determinante(double matrix[100][100], int, int);
 void change_rows(double matrix[100][100], int, int, int);
 //matriz[Rj][i] != 0 for maker the changer of rows
 //create function for find Rj
@@ -20,7 +19,7 @@ int main(){
 }
 
 void ask(){
-  int Ri, Rj;
+  int Ri, Rj, ind = 1;
   double matrix[100][100];
   int n;
   cout << "Transform the matrix n*n A in U triangle superior matrix" << endl;
@@ -32,27 +31,24 @@ void ask(){
     }
   }
 
-  if(matrix[0][0] == 0){
+  if(matrix[0][0] == 0){//if exist change of row then Det_A = -detA
     Ri = 0;
     Rj = find_Rj(matrix, n);
     change_rows(matrix, n, Ri, Rj);
+    ind = -1;
   }
 
-  factorizacion_LU(matrix, n);
+  factorizacion_LU(matrix, n, ind);
 }
 
-void factorizacion_LU(double matrix[100][100], int n){
+void factorizacion_LU(double matrix[100][100], int n, int ind){
   double a;
   int Ri, Rj, N = 0;
   for(int i = 0; i < n; i ++){
     for(int i = N + 1; i < n; i ++){
       Ri = N;
       Rj = i;
-      if(matrix[N][N] == 0){
-        change_row(matrix, n);//then exist PA = LU, use a variable for
-        //count the number of the change of rows, moreover detA = +detU
-        //or detA = -detU
-      }
+      
       a = -matrix[i][N]/matrix[N][N];
       //case matrix[N][N] == 0 then change of row, where this row before of 
       //element matrix[i][i] are zero
@@ -67,7 +63,7 @@ void factorizacion_LU(double matrix[100][100], int n){
     }
   }
 
-  cout << "\nDeterminant is: " << determinante(matrix, n) << endl;
+  cout << "\nDeterminant is: " << determinante(matrix, n, ind) << endl;
   
 }
 
@@ -91,21 +87,24 @@ void convert_vector(double matrix[100][100], int n, int Rj, int Ri, double a){
   }  
 }
 
-double determinante(double matrix[100][100], int n){
+double determinante(double matrix[100][100], int n, int ind){
   double D = 1;
   for(int i = 0; i < n; i ++){
     D = D*matrix[i][i];
   }
-
+  D = ind*D;
   return D;
 }
 
 int find_Rj(double matrix[100][100], int n){
+  double R, t = 0;
   for(int i = 1; i < n; i ++){
-    if(matrix[i][0] != 0){
-      return i;
+    if(matrix[i][0] != 0 and t == 0){
+      R = i;
+      t = 1;
     }
   }
+  return R;
 }
 
 void change_rows(double matrix[100][100], int n, int Ri, int Rj){

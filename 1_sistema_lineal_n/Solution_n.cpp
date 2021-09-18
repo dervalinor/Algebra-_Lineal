@@ -30,5 +30,5 @@ void ask(){
     }
   }
   //now we must calculate of the determinant for know if system have solution
-
+  
 }
